@@ -1,0 +1,41 @@
+import javax.swing.*;
+import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class DigitalClock extends JFrame {
+
+    // Constructor to set up the clock display
+    public DigitalClock() {
+        // Set up the JFrame properties
+        setTitle("Digital Clock");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Create a label to display time
+        JLabel timeLabel = new JLabel("", JLabel.CENTER);
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 50));
+        timeLabel.setForeground(Color.BLACK);
+
+        // Add the label to the frame
+        add(timeLabel);
+
+        // Set up a thread to update the time every second
+        Timer timer = new Timer(1000, e -> {
+            String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
+            timeLabel.setText(time);
+        });
+
+        // Start the timer
+        timer.start();
+    }
+
+    public static void main(String[] args) {
+        // Create and display the clock window
+        SwingUtilities.invokeLater(() -> {
+            DigitalClock clock = new DigitalClock();
+            clock.setVisible(true);
+        });
+    }
+}
